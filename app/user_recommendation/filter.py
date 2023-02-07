@@ -3,10 +3,7 @@ import time
 import schedule
 import threading
 
-from .database import componentcompares_df, projects_df, languagetexts_df, users_df
-
-
-
+from .database import componentcompares_df, projects_df, languagetexts_df, users_df, audit_view_df
 
 def component_compare():
     
@@ -17,7 +14,7 @@ def component_compare():
                         how='inner')
 
     # Eliminate duplicate datas from filter_2.
-    filter_2 = filter_2.drop_duplicates(subset = ['projectname','componentnamekey','systemnamekey'])
+    filter_2 = filter_2.drop_duplicates(subset = ['userid','projectname','componentnamekey','systemnamekey'])
     filter_2 = filter_2[filter_2.duplicated(subset='userid', keep=False)]
 
     # giving the value to systemnamekey.

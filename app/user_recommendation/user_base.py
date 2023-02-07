@@ -13,7 +13,7 @@ router = APIRouter(
 )    
 
 
-@router.post("/recommendation by User's Data")
+@router.post("/recommendation by User's Data (component_campare_Table)")
 # getting the product name from the user
 def recommend(request: schemas.ProjectDetails):
     
