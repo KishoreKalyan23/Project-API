@@ -5,7 +5,7 @@
     
     
     
-    #  & "c:/Users/Vishnupriya/Desktop/kishore/ML Sample/Product Suggestion/Project API/env/Scripts/Activate.ps1"
+    #  & "c:/Users/Vishnupriya/Desktop/kishore/Python-API/env/Scripts/Activate.ps1" 
       
 
 # schedule.every(10).minutes.do(read_data)
@@ -20,4 +20,10 @@
 #   "systemnamekey": "Com_00013842",
 #   "componentnamekey": "Com_00013848"
 # }
-    
+
+# repeated result  
+# {
+#   "projectcode": "3GVWAR",
+#   "systemnamekey": "Com_00000933",
+#   "componentnamekey": "Com_00000446"
+# }

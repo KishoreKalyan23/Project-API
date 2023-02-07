@@ -36,4 +36,3 @@ languagetexts_df = pd.DataFrame(languagetexts)
 users_df = pd.DataFrame(users)
 
 audit_view_df = pd.DataFrame(audit_view)
-
