@@ -1,0 +1,8 @@
+fastapi
+pandas
+uvicorn
+sqlalchemy
+psycopg2
+schedule
+pydantic
+difflib
