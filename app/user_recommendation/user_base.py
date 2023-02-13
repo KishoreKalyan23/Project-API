@@ -5,6 +5,8 @@ from fastapi import APIRouter, HTTPException, status
 
 from .filter import final_df, filter_7
 
+from .database import audit_view_csv
+
 from . import schemas
 
 router = APIRouter(
@@ -98,6 +100,48 @@ def recommend(request: schemas.ProjectDetails):
     print('Most users compared projects : ')
     print(output)
     return {"result": final_result}
+
+
+
+@router.post("/recommendation by User's Data (audit_view_Table)")
+# getting the product name from the user
+def recommend(request: schemas.Audit_Details):
+    
+    try:
+        # selecting all user data in a table using input project name.
+        select_by_project = audit_view_csv[(audit_view_csv['mainproject'] == request.project_id) & (audit_view_csv['mainpackagename'] == request.packagename) & (audit_view_csv['maincomponentname'] == request.componentname)]
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"There is relevent project for given input")
+        
+    droping = select_by_project.drop_duplicates(subset = ['maincomponentname','suggestedproject','packagename', 'componentname'])    
+    
+    # Group the DataFrame by the columns User ID and Name
+    grouped = droping.groupby(['suggestedproject','packagename', 'componentname']).size().reset_index(name='counts')
+
+    max = grouped['counts'].max()
+    print(f' Maximun repeated project count is {max}')
+    # Find the rows with count >= 3 (i.e., matching rows)
+    # matching_rows = grouped[grouped['counts'] >= max]
+    
+    if max == 0:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"There is no similar projects avilable for given input")
+    elif max == 1:
+        matching_rows = grouped.head(10)
+    else:
+        grouped.sort_values(by='counts', ascending=True, inplace=True)
+        matching_rows = grouped.head(10)
+    
+    list_1 =[]
+    for index, row in matching_rows.iterrows():   
+            projectid = row['suggestedproject']
+            packagename = row['packagename']
+            componentname = row['componentname']
+            users_recommendation = {'projectid': projectid, 'packagename': packagename, 'componentname': componentname }
+            list_1.append(users_recommendation)
+    return list_1
+    
 
 
 

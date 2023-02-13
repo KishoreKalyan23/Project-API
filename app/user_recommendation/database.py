@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine,text
 import pandas as pd
 
+
 # Database connection.
 
 engine = create_engine('postgresql+psycopg2://admin:admin1234@postgres.telecomatics.com:5432/icebergprodnov')
@@ -36,3 +37,9 @@ languagetexts_df = pd.DataFrame(languagetexts)
 users_df = pd.DataFrame(users)
 
 audit_view_df = pd.DataFrame(audit_view)
+
+
+# inserting the filtered csv data.
+
+audit_view_csv = pd.read_csv("./app/user_recommendation/Data/audit_view_final_data.csv")
+

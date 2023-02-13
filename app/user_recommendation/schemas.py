@@ -9,3 +9,8 @@ class NameDetails(BaseModel):
     projectname: str
     systemname: str
     componentname: str
+    
+class Audit_Details(BaseModel):
+    project_id: int
+    packagename: str
+    componentname: str
