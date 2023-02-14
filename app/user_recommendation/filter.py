@@ -180,7 +180,7 @@ def audit_view():
 
 
 
-schedule.every().day.at("18:00").do(audit_view)
+schedule.every().day.at("06:00").do(audit_view)
 def run_schedule_1():
     while True:
         schedule.run_pending()
