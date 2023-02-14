@@ -169,22 +169,33 @@ def audit_view():
     dic = list1
     return dic
 
-
-def run_api():
-    
-    skip_function = True
-    
-    if not skip_function:
-        # Call the function you want to skip
-        audit_view()
-    else:
-        # Schedule the function to run at a later time
-        schedule.every().day.at("18:00").do(audit_view)
+schedule.every().day.at("11:00").do(audit_view)
+def run_schedule_1():
+    while True:
         dic = audit_view()
         df = pd.DataFrame(dic)
-        df.to_csv("data/audit_view_final_data.csv", index=False, index_label='Index')
-        print(f' Total rows in DataFrame is {df.count()}')
-        while True:
-            schedule.run_pending()
-            time.sleep(1)
+        df.to_csv("./app/user_recommendation/Data/audit_view_final_data.csv", index=False, index_label='Index')
+        schedule.run_pending()
+        time.sleep(1)
+    
+thread = threading.Thread(target=run_schedule_1)
+thread.start()
+
+# def run_api():
+    
+#     skip_function = True
+    
+#     if not skip_function:
+#         # Call the function you want to skip
+#         audit_view()
+#     else:
+#         # Schedule the function to run at a later time
+#         schedule.every().day.at("18:00").do(audit_view)
+#         dic = audit_view()
+#         df = pd.DataFrame(dic)
+#         df.to_csv("data/audit_view_final_data.csv", index=False, index_label='Index')
+#         print(f' Total rows in DataFrame is {df.count()}')
+#         while True:
+#             schedule.run_pending()
+#             time.sleep(1)
             
