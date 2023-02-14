@@ -3,12 +3,15 @@ import time
 import schedule
 import threading
 from difflib import SequenceMatcher
-
+from ..logging import log
 from .database import componentcompares_df, projects_df, languagetexts_df, users_df, audit_view_df
 
 def component_compare():
+    log.logger.info('-----------*** component_compare ***-------------')
+    log.logger.info('Execution started')
     
     filter_1 = componentcompares_df[['userid', 'projectcode', 'projectid', 'systemnamekey', 'componentnamekey', 'creationtime']]
+    
     
     # Merging the filter_1 and raw_data_2 to get the project name.
     filter_2 = pd.merge(filter_1, projects_df[["projectcode", "projectname"]], left_on='projectcode', right_on='projectcode',
@@ -88,6 +91,7 @@ def component_compare():
     value  = filter_7
     result = list1
     final_df = pd.DataFrame(result)
+    log.logger.info('Execution completed')
     print(final_df.head())
     return result, value
 
@@ -96,11 +100,10 @@ result, value = result1
 filter_7 = value
 result = result
 final_df = pd.DataFrame(result)
-final_df.to_csv("./app/user_recommendation/Data/component_compare_filtered_data.csv", index=False, index_label='Index')
+final_df.to_csv("./app/user_recommendation/Data/component_compare_final_data.csv", index=False, index_label='Index')
+log.logger.info('component_compare_final_data.csv file updated')
 
-
-
-schedule.every(10).minutes.do(component_compare)
+schedule.every(2).hours.do(component_compare)
 def run_schedule():
     while True:
         schedule.run_pending()
@@ -114,7 +117,9 @@ def audit_view():
     
     # slecting the required columns from a dataframe
     filter_1 = audit_view_df[['inserted_date', 'email', 'projectid','packagenamekey', 'systemnamekey', 'componentnamekey']]
-    print(filter_1.head())
+    log.logger.info('-----------*** audit_view_Table ***-------------')
+    log.logger.info('Execution Started')
+
     # skiping the row if the systemnamekey contains the value as Com_00000001(overview).
     filter_2 = filter_1.query('systemnamekey != "Com_00000001"')
     
@@ -167,14 +172,17 @@ def audit_view():
                 dic = {'user': email,'main_date': main_date, 'mainproject': main_projectid, 'mainpackagename': main_packagename, 'mainsystemname': main_systemname, 'maincomponentname': main_componentname, 'suggestedproject': suggested_project, 'inseted_date': inseted_date, 'packagename': packagename, 'systemname': systemname, 'componentname': componentname}
                 list1.append(dic)
     dic = list1
-    return dic
+    log.logger.info('Execution Completed')
+    df = pd.DataFrame(dic)
+    df.to_csv("./app/user_recommendation/Data/audit_view_final_data.csv", index=False, index_label='Index')
+    log.logger.info('audit_view_final_data.csv file updated')
 
-schedule.every().day.at("11:00").do(audit_view)
+
+
+
+schedule.every().day.at("18:00").do(audit_view)
 def run_schedule_1():
     while True:
-        dic = audit_view()
-        df = pd.DataFrame(dic)
-        df.to_csv("./app/user_recommendation/Data/audit_view_final_data.csv", index=False, index_label='Index')
         schedule.run_pending()
         time.sleep(1)
     

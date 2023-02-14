@@ -41,5 +41,7 @@ audit_view_df = pd.DataFrame(audit_view)
 
 # inserting the filtered csv data.
 
+component_compare_csv = pd.read_csv('./app/user_recommendation/Data/component_compare_final_data.csv')
+
 audit_view_csv = pd.read_csv("./app/user_recommendation/Data/audit_view_final_data.csv")
 

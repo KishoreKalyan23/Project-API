@@ -1,0 +1,21 @@
+2023-02-14 17:59:37,719 INFO     -----------*** component_compare ***-------------
+2023-02-14 17:59:37,719 INFO     Execution started
+2023-02-14 17:59:43,457 INFO     Execution completed
+2023-02-14 17:59:43,531 INFO     component_compare_final_data.csv file updated
+2023-02-14 17:59:43,531 INFO     -----------*** component_compare ***-------------
+2023-02-14 18:00:00,669 DEBUG    Running job Job(interval=1, unit=days, do=audit_view, args=(), kwargs={})
+2023-02-14 18:00:00,669 DEBUG    Running job Job(interval=1, unit=days, do=audit_view, args=(), kwargs={})
+2023-02-14 18:00:00,684 INFO     -----------*** audit_view_Table ***-------------
+2023-02-14 18:00:00,684 INFO     Execution Started
+2023-02-14 18:00:00,716 INFO     -----------*** audit_view_Table ***-------------
+2023-02-14 18:00:00,716 INFO     Execution Started
+2023-02-14 18:52:56,057 INFO     Execution Completed
+2023-02-14 18:53:47,047 INFO     Execution Completed
+2023-02-14 18:53:54,793 INFO     audit_view_final_data.csv file updated
+2023-02-14 18:53:54,793 INFO     -----------*** audit_view_Table ***-------------
+2023-02-14 18:53:58,661 INFO     audit_view_final_data.csv file updated
+2023-02-14 18:53:58,661 INFO     -----------*** audit_view_Table ***-------------
+2023-02-14 18:54:26,224 INFO     -----------*** component_compare ***-------------
+2023-02-14 18:54:26,224 INFO     Execution started
+2023-02-14 18:54:32,398 INFO     Execution completed
+2023-02-14 18:54:32,477 INFO     component_compare_final_data.csv file updated

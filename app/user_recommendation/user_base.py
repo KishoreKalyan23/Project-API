@@ -3,9 +3,9 @@ from difflib import SequenceMatcher
 
 from fastapi import APIRouter, HTTPException, status
 
-from .filter import final_df, filter_7
+from .filter import filter_7
 
-from .database import audit_view_csv
+from .database import audit_view_csv, component_compare_csv
 
 from . import schemas
 
@@ -39,7 +39,7 @@ def recommend(request: schemas.ProjectDetails):
                             detail=f"componentnamekey : '{request.componentnamekey}' dosen't had any key value")
     
     # filter a table with user input project_name and system_name.
-    select_by_project = final_df[final_df['mainproject'] == project_name]
+    select_by_project = component_compare_csv[component_compare_csv['mainproject'] == project_name]
     if not select_by_project.any().any():
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"Project_id : {project_name} is not available")
@@ -121,8 +121,6 @@ def recommend(request: schemas.Audit_Details):
 
     max = grouped['counts'].max()
     print(f' Maximun repeated project count is {max}')
-    # Find the rows with count >= 3 (i.e., matching rows)
-    # matching_rows = grouped[grouped['counts'] >= max]
     
     if max == 0:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
