@@ -1,21 +1,41 @@
-2023-02-14 17:59:37,719 INFO     -----------*** component_compare ***-------------
-2023-02-14 17:59:37,719 INFO     Execution started
-2023-02-14 17:59:43,457 INFO     Execution completed
-2023-02-14 17:59:43,531 INFO     component_compare_final_data.csv file updated
-2023-02-14 17:59:43,531 INFO     -----------*** component_compare ***-------------
-2023-02-14 18:00:00,669 DEBUG    Running job Job(interval=1, unit=days, do=audit_view, args=(), kwargs={})
-2023-02-14 18:00:00,669 DEBUG    Running job Job(interval=1, unit=days, do=audit_view, args=(), kwargs={})
-2023-02-14 18:00:00,684 INFO     -----------*** audit_view_Table ***-------------
-2023-02-14 18:00:00,684 INFO     Execution Started
-2023-02-14 18:00:00,716 INFO     -----------*** audit_view_Table ***-------------
-2023-02-14 18:00:00,716 INFO     Execution Started
-2023-02-14 18:52:56,057 INFO     Execution Completed
-2023-02-14 18:53:47,047 INFO     Execution Completed
-2023-02-14 18:53:54,793 INFO     audit_view_final_data.csv file updated
-2023-02-14 18:53:54,793 INFO     -----------*** audit_view_Table ***-------------
-2023-02-14 18:53:58,661 INFO     audit_view_final_data.csv file updated
-2023-02-14 18:53:58,661 INFO     -----------*** audit_view_Table ***-------------
-2023-02-14 18:54:26,224 INFO     -----------*** component_compare ***-------------
-2023-02-14 18:54:26,224 INFO     Execution started
-2023-02-14 18:54:32,398 INFO     Execution completed
-2023-02-14 18:54:32,477 INFO     component_compare_final_data.csv file updated
+2023-02-15 11:24:37,982 INFO     -----------*** component_compare ***-------------
+2023-02-15 11:24:37,982 INFO     Execution started
+2023-02-15 11:24:43,528 INFO     Execution completed
+2023-02-15 11:24:43,619 INFO     component_compare_final_data.csv file updated
+2023-02-15 11:25:03,571 INFO     -----------*** component_compare ***-------------
+2023-02-15 11:25:03,571 INFO     Execution started
+2023-02-15 11:25:10,001 INFO     Execution completed
+2023-02-15 11:25:10,078 INFO     component_compare_final_data.csv file updated
+2023-02-15 11:35:10,427 DEBUG    Running job Job(interval=10, unit=minutes, do=component_compare, args=(), kwargs={})
+2023-02-15 11:35:10,427 INFO     -----------*** component_compare ***-------------
+2023-02-15 11:35:10,427 INFO     Execution started
+2023-02-15 11:35:16,660 INFO     Execution completed
+2023-02-15 11:40:00,336 DEBUG    Running job Job(interval=1, unit=days, do=audit_view, args=(), kwargs={})
+2023-02-15 11:40:00,383 INFO     -----------*** audit_view_Table ***-------------
+2023-02-15 11:40:00,383 INFO     Execution Started
+2023-02-15 12:07:37,306 INFO     Execution Completed
+2023-02-15 12:07:45,553 INFO     audit_view_final_data.csv file updated
+2023-02-15 12:07:47,076 DEBUG    Running job Job(interval=10, unit=minutes, do=component_compare, args=(), kwargs={})
+2023-02-15 12:07:47,076 INFO     -----------*** component_compare ***-------------
+2023-02-15 12:07:47,076 INFO     Execution started
+2023-02-15 12:07:53,902 INFO     Execution completed
+2023-02-15 12:10:47,553 INFO     -----------*** component_compare ***-------------
+2023-02-15 12:10:47,553 INFO     Execution started
+2023-02-15 12:10:53,542 INFO     Execution completed
+2023-02-15 12:10:53,645 INFO     component_compare_final_data.csv file updated
+2023-02-15 14:10:54,630 DEBUG    Running job Job(interval=2, unit=hours, do=component_compare, args=(), kwargs={})
+2023-02-15 14:10:54,630 INFO     -----------*** component_compare ***-------------
+2023-02-15 14:10:54,630 INFO     Execution started
+2023-02-15 14:11:00,476 INFO     Execution completed
+2023-02-15 16:11:00,494 DEBUG    Running job Job(interval=2, unit=hours, do=component_compare, args=(), kwargs={})
+2023-02-15 16:11:00,494 INFO     -----------*** component_compare ***-------------
+2023-02-15 16:11:00,494 INFO     Execution started
+2023-02-15 16:11:06,380 INFO     Execution completed
+2023-02-15 18:11:06,791 DEBUG    Running job Job(interval=2, unit=hours, do=component_compare, args=(), kwargs={})
+2023-02-15 18:11:06,791 INFO     -----------*** component_compare ***-------------
+2023-02-15 18:11:06,791 INFO     Execution started
+2023-02-15 18:11:12,790 INFO     Execution completed
+2023-02-15 20:11:13,217 DEBUG    Running job Job(interval=2, unit=hours, do=component_compare, args=(), kwargs={})
+2023-02-15 20:11:13,217 INFO     -----------*** component_compare ***-------------
+2023-02-15 20:11:13,217 INFO     Execution started
+2023-02-15 20:11:19,188 INFO     Execution completed

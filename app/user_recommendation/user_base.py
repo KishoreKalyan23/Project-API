@@ -1,4 +1,3 @@
-import pandas as pd
 from difflib import SequenceMatcher
 
 from fastapi import APIRouter, HTTPException, status
@@ -49,57 +48,39 @@ def recommend(request: schemas.ProjectDetails):
     if not select_by_systemname.any().any():
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"System_name_key : {system_name} is not available")
-    similarity_scores = []
+        
+    # Droping the duplicate values. if it is in same email id
+    droping =select_by_systemname.drop_duplicates(subset = ['email','projectname','systemname', 'componentname'])
 
-    # give score to componentname column by input-data.
-    column = select_by_systemname['componentname']
+    # Group the DataFrame to find the repeated count 
+    grouped = droping.groupby(['email','projectname','systemname', 'componentname']).size().reset_index(name='counts')
+    
+    # giving the similare score and find the similar one
+
+    from difflib import SequenceMatcher
+    similarity_scores = []
+    column = grouped['componentname']
+
     for element in column:
         similarity = SequenceMatcher(None, component_name, element).ratio()
         similarity_scores.append(similarity)
-    select_by_systemname['similarity_scores'] = similarity_scores
 
+    sim = grouped.assign(similarity_scores = similarity_scores)
+    sim
 
-    # filtering the table with similarity_scores column that contains our score requirement.
-    score = 0.7
-    select_by_score = select_by_systemname[select_by_systemname['similarity_scores'] >= score]
-    print(f'similarity_scores column that contains more then {score} :')
-    print(select_by_score)
-    if not select_by_score.any().any():
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"Similar Componentnamekey for '{component_name}' is not available")
+    # align the similarity_score in descending order
+    sim.sort_values(by='similarity_scores', ascending=False, inplace=True)
+    max_repeated_values = sim.head(10)
 
-    # create a new column 'repeated_counts' and insert a repeated count of the projectname.
-    value = select_by_score.groupby('projectname').size().reset_index(name='repeated_counts')
-    repeated_result = select_by_score.merge(value, on='projectname', how='left')
-
-
-    # find the maximum repeated_count value.
-    column = repeated_result['repeated_counts']
-    max_repeated_value = column.max()
-
-
-    # iterate the value maximum to minimum
     list_1 = []
-    r = max_repeated_value
-   
-    for a in range(r, 0, -1):
-        # print(f'{a} no of users are compared with this part')
-        table = repeated_result[repeated_result['repeated_counts'] == a]
-        #     print(table)
-        for b in range(len(table)):
-            projectname1 = table.iloc[b]['projectname']
-            systemname1 = table.iloc[b]['systemname']
-            componentname1 = table.iloc[b]['componentname']
-            dic1 = {"projectname": projectname1, "systemname": systemname1, "componentname": componentname1}
-            list_1.append(dic1)
-        break
-    final_result = list_1
-
-    # view the result dictionary in table formate.
-    output = pd.DataFrame(final_result)
-    print('Most users compared projects : ')
-    print(output)
-    return {"result": final_result}
+    for j in range(len(max_repeated_values)):
+            projectname = max_repeated_values.iloc[j]['projectname']
+            systemname = max_repeated_values.iloc[j]['systemname']
+            componentname = max_repeated_values.iloc[j]['componentname']
+            dic = {"projectname":projectname,"systemname":systemname,"componentname":componentname}
+            list_1.append(dic)
+    result = list_1
+    return {"result": result}
 
 
 
@@ -116,7 +97,7 @@ def recommend(request: schemas.Audit_Details):
         
     droping = select_by_project.drop_duplicates(subset = ['maincomponentname','suggestedproject','packagename', 'componentname'])    
     
-    # Group the DataFrame by the columns User ID and Name
+    # Group the DataFrame to find the repeated count
     grouped = droping.groupby(['suggestedproject','packagename', 'componentname']).size().reset_index(name='counts')
 
     max = grouped['counts'].max()
@@ -128,7 +109,7 @@ def recommend(request: schemas.Audit_Details):
     elif max == 1:
         matching_rows = grouped.head(10)
     else:
-        grouped.sort_values(by='counts', ascending=True, inplace=True)
+        grouped.sort_values(by='counts', ascending=False, inplace=True)
         matching_rows = grouped.head(10)
     
     list_1 =[]

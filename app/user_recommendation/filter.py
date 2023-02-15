@@ -103,14 +103,14 @@ final_df = pd.DataFrame(result)
 final_df.to_csv("./app/user_recommendation/Data/component_compare_final_data.csv", index=False, index_label='Index')
 log.logger.info('component_compare_final_data.csv file updated')
 
-schedule.every(2).hours.do(component_compare)
-def run_schedule():
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+# schedule.every(2).hours.do(component_compare)
+# def run_schedule():
+#     while True:
+#         schedule.run_pending()
+#         time.sleep(1)
     
-thread = threading.Thread(target=run_schedule)
-thread.start()
+# thread = threading.Thread(target=run_schedule)
+# thread.start()
 
 
 def audit_view():
@@ -179,8 +179,9 @@ def audit_view():
 
 
 
-
+schedule.every(2).hours.do(component_compare)
 schedule.every().day.at("06:00").do(audit_view)
+
 def run_schedule_1():
     while True:
         schedule.run_pending()

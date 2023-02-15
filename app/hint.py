@@ -14,23 +14,6 @@
 #     schedule.run_pending()
 #     time.sleep(1)
 
-# no one compared projects
-# {
-#   "projectcode": "MAY25V3",
-#   "systemnamekey": "Com_00013842",
-#   "componentnamekey": "Com_00013848"
-# }
 
-# repeated result  
-# {
-#   "projectcode": "3GVWAR",
-#   "systemnamekey": "Com_00000933",
-#   "componentnamekey": "Com_00000446"
-# }
-# {
-#   "project_id": 189,
-#   "packagename": "Tree_Chassis_Advance_Study",
-#   "componentname": "Frames System"
-# } 
 
 
